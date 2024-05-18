@@ -1,0 +1,45 @@
+<%- include('layout/header') %>
+<main>
+  <div class="center-contant add-user-section">
+    <form action="/add" method="post" class="user-create-form">
+      <h2 class="new-user-title">Add New User</h2>
+      <div class="main-form">
+        <div class="singal-input">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter Nmae"
+            id="name"
+            required
+          />
+        </div>
+        <div class="singal-input">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            id="email"
+            required
+          />
+        </div>
+        <div class="singal-input">
+          <label for="phone">Phone</label>
+          <input
+            type="number"
+            name="phone"
+            placeholder="Enter Phone"
+            id="phone"
+          />
+        </div>
+        <div class="singal-input">
+          <label for="image">Image</label>
+          <input type="file" name="image" id="image" />
+        </div>
+        <button type="submit" class="form-submit-btn">Add User</button>
+      </div>
+    </form>
+  </div>
+</main>
+<%- include('layout/footer') %>
