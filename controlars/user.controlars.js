@@ -9,9 +9,16 @@ const multer = require("multer");
 //     cb(null, file.filename + "_" + Date.now() + "_" + file.originalname);
 //   },
 // });
-
-const getUser = (req, res) => {
-  res.render("index", { title: "Home page" });
+const getUser = async (req, res) => {
+  try {
+    const users = await User.find().exec();
+    res.render("index", {
+      title: "Home Page",
+      users: users,
+    });
+  } catch (err) {
+    res.json({ message: err.message });
+  }
 };
 
 const addUser = (req, res) => {

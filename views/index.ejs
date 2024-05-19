@@ -13,7 +13,8 @@
         X
       </button>
     </div>
-    <% } %>
+    <% } %> <% if (users != "") { %>
+
     <table class="user-table">
       <thead>
         <tr style="background: #333; color: #fff">
@@ -26,19 +27,30 @@
         </tr>
       </thead>
       <tbody>
+        <% users.forEach((row, index) => { %>
         <tr>
-          <td>1</td>
-          <td><img src="" alt="" /></td>
-          <td>Md. Shadat Hossian</td>
-          <td>shadathossain3500@gmail.com</td>
-          <td>01787054846</td>
+          <td><%= index %></td>
+          <td>
+            <img class="user-imgae" src="<%= row.image %>" width="50" />
+          </td>
+          <td><%= row.name %>/td></td>
+          <td><%= row.email %>/td></td>
+          <td><%= row.phone %></td>
           <td class="eaditeAndUpdate">
-            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-            <a href="#"><i class="fa-solid fa-trash"></i></a>
+            <a href="/edit/<%= row._id  %>"
+              ><i class="fa-solid fa-pen-to-square"></i
+            ></a>
+            <a href="/delete/<%= row._id %>"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
           </td>
         </tr>
+        <% }) %>
       </tbody>
     </table>
+    <% } else { %>
+    <h1>No User found!!!</h1>
+    <% } %>
   </div>
 </main>
 
