@@ -1,6 +1,19 @@
 <%- include('layout/header') %>
 <main>
   <div class="center-contant">
+    <% if (message) { %>
+    <div class="alart-message alert-<%= message.type %>" role="alert">
+      <strong><%= message.message %></strong>
+      <button
+        type="button"
+        class="close-btn"
+        date-bs-dismiss="alert"
+        onclick="closeMessage(this)"
+      >
+        X
+      </button>
+    </div>
+    <% } %>
     <table class="user-table">
       <thead>
         <tr style="background: #333; color: #fff">

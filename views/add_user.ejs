@@ -1,7 +1,12 @@
 <%- include('layout/header') %>
 <main>
   <div class="center-contant add-user-section">
-    <form action="/add" method="post" class="user-create-form">
+    <form
+      action="/add"
+      method="post"
+      class="user-create-form"
+      enctype="multipart/form-data"
+    >
       <h2 class="new-user-title">Add New User</h2>
       <div class="main-form">
         <div class="singal-input">

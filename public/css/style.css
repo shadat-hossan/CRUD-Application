@@ -143,3 +143,23 @@ html {
 .form-submit-btn:hover {
   background: #026ead;
 }
+
+.alart-message {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #17ff2b;
+  color: #00860b;
+}
+
+.close-btn {
+  background: none;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+}
