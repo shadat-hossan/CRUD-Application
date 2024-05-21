@@ -7,6 +7,9 @@ const {
   getUser,
   addUser,
   postUsear,
+  editGetUser,
+  userUpdate,
+  deleteUser,
 } = require("../controlars/user.controlars");
 
 const router = express.Router();
@@ -30,5 +33,11 @@ router.get("/", getUser);
 router.get("/add", addUser);
 
 router.post("/add", upload, postUsear);
+
+router.get("/edit/:id", editGetUser);
+
+router.post("/update/:id", upload, userUpdate);
+
+router.delete("/delete/:id", deleteUser);
 
 module.exports = router;

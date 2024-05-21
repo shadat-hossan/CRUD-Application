@@ -11,11 +11,14 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const DBURL = process.env.MONGODB;
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // set ejs tamplate Engine
 app.set("view engine", "ejs");
 
-//
 app.use(express.static(staticPath));
+
+app.use(express.static("uploads"));
 
 const Route = require("./routes/user.routes.js");
 
