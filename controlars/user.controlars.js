@@ -4,14 +4,6 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const { trace } = require("console");
 
-// var strage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "/uploads");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.filename + "_" + Date.now() + "_" + file.originalname);
-//   },
-// });
 const getUser = async (req, res) => {
   try {
     const users = await User.find().exec();
@@ -34,7 +26,7 @@ const postUsear = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
-      image: req.file.filename, // corrected from req.body.filename to req.file.filename
+      image: req.file.filename,
     });
 
     await user.save();
@@ -104,25 +96,37 @@ const userUpdate = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  let id = req.params.id;
-  await User.findByIdAndRemove(id, (err, result) => {
-    if (result.image != "") {
+  try {
+    const id = req.params.id;
+    const user = await User.findByIdAndRemove(id);
+
+    if (!user) {
+      req.session.message = {
+        type: "error",
+        message: "User not found!",
+      };
+      return res.redirect("/");
+    }
+
+    if (user.image) {
+      const imagePath = path.join(__dirname, "uploads", user.image);
       try {
-        fs.statSync("./uploads" + result.image);
+        await fs.access(imagePath);
+        await fs.unlink(imagePath);
       } catch (error) {
-        console.log(error);
+        console.log("Error removing image file:", error);
       }
     }
-    if (err) {
-      res.json({ message: err.message });
-    } else {
-      req.session.message = {
-        type: "info",
-        message: "User Delete Successfully!",
-      };
-      res.redirect("/");
-    }
-  });
+
+    req.session.message = {
+      type: "info",
+      message: "User deleted successfully!",
+    };
+    res.redirect("/");
+  } catch (err) {
+    console.log("Error:", err);
+    res.json({ message: err.message });
+  }
 };
 
 module.exports = {
